@@ -62,7 +62,7 @@ function onSelectAnswer (e) {
     } else {
 
         score--;
-        displayMessage(wrong :-(')
+        displayMessage('incorrect :-(')
     }
 
     // Call up the next question
