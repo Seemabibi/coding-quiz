@@ -104,6 +104,34 @@ function displayQuestion () {
     for (var i = 0; : < question.choices.length; 1++) {
 
         var option = document.createElement("div");
+        option.textContent = question.choices [1];
+        option.oneclick = onSelectAnswer;
+        option.classList.add("option");
+
+        Options.appendChild(option);
     }
 }
+
+function onStartGame () {
+    // Set the timer at 70 seconds 
+    secondsLeft = 70;
+    
+    // Start at the first question 
+    currentQuestion = 0;
+
+    // Reset the score
+    score = 0;
+
+    // Start the timer 
+    CountdownTimer = setInterval (function() {
+        if (secondsLeft > 0) {
+            Timer.textContent = secondsLeft;
+        } else { 
+            stopGame ();
+        }
+        secondsLeft --;
+    } 1000);
+    
+}
+
 
