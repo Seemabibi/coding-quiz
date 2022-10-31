@@ -21,11 +21,14 @@ var CountdownTimer;
 function StopGame() {
     // Stop the countdown timer 
     ClearInterval(CountdownTimer)
+   
     // clear the timer 
     Timer.textContent = ""
+
     // Hide the question and show the result 
     Quiz.style.display = 'none';
     Result.style.display = 'flex'
+
     // Display the score
     Summary.textContent = "Your Score Is: " + score;
 }
@@ -56,6 +59,7 @@ function onSelectAnswer(e) {
 function displayMessage(msg) {
     // Display the Message
     Message.textContent = msg;
+
     // Clear the message afer 1 second
     setTimeout(function () {
         message.textContent = "";
@@ -65,6 +69,7 @@ function displayQuestion() {
     // Increment to get the next question
     currentQuestion++;
     console.log('Current Question Is ' + currentQuestion);
+
     // Have we ran out of questions?
     if (currentQuestion >= question.length) {
         StopGame();
@@ -73,8 +78,10 @@ function displayQuestion() {
     // Load Question information from the question array
     var question = questions[currentQuestion];
     document.getElementById("question").textContent = question.title
+
     //Clear any existing options 
     Options.innerHTML = "";
+
     // Load through the choice and output the new possible options 
     for (var i = 0; i < question.choices.length; i++) {
         var option = document.createElement("div");
