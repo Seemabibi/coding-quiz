@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UFT-B">
     <meta http-equiv="X-UA-Vompartible" content="IE-edge">
@@ -11,23 +11,19 @@
 
 <body>
     <header>
-        <div id="Highscores">
-            <a href="/scores.html">High Scores</a>
-        </div>
-        <div id="Timer"></div>
-    </header>
-    <main>
-        <div id="Welcome">
+        <main class="main-container"> 
+            <!-- WelcomeQuiz-->
+        <div id="Welcome" class="individual-container"> 
             <h1>Welcome to the Code Quiz</h1>
             <button id="StartQuiz" class="btn">Start Quiz</button>
         </div>
+        <!--MainQuiz-->
         <div id="Quiz" class="hidden">
             <div id="question"></div>
             <div id="Message">
-
             </div>
-        </div>
-        <div id="result" class="hidden">
+            <!--Results-->
+            <div id="end" class="individual-container">
             <div id="summary"></div>
             <button id="ViewScores" class="btn">View All High Scores</button>
             <input type="text" id="initials" placeholder="Enter your initials" />
@@ -37,7 +33,9 @@
     </main>
 
 </body>
-<script src="/assets/js/questions.js"></script>
-<script src="/assets/js/quiz.js"></script>
 
-</html>
+ <!--ScriptToQuestions and Quiz Link-->
+ <script src="/assets/js/questions.js"></script>
+ <script src="/assets/js/quiz.js"></script>
+
+</html> 
