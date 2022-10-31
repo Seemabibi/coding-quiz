@@ -131,7 +131,12 @@ function onStartGame () {
         }
         secondsLeft --;
     } 1000);
-    
+
+document.getElementById ('greeting').style.display = "none";
+end.style.display = "none"; codeQuiz.style.display = "flex";
+
+displayQuestion();
 }
 
-
+beginquiz.adEventListener("click", onStartGame);
+SaveScore.addEventListener ("click")
