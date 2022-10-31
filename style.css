@@ -1,0 +1,50 @@
+body {
+    background-color: var(--main-bg-color);
+    font-family: sans-serif;
+    height: 1vh;
+    background-image: url;
+}
+
+header {
+    width: 60;
+    height: 100px;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+
+main {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 3.0;
+}
+
+div {
+    color:darkslategray var(--main-text-color);
+}
+
+#timer,
+#highscores {
+    background-color: lavender; var (--button-color);
+    padding: 16px;
+    border-radius: 30px;
+    color: var(--light-text-color);
+    font-size: 1.3em;
+}
+
+#welcome {
+    background: var(--main-bg-color);
+    height: var(--box-height);
+    width: var(--box-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    
+}

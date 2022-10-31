@@ -12,8 +12,8 @@ for (var i = 0; i <localStorage.length; i++) {
     var result = document.createElement("div");
     result.classList.add('result');
 
-    result.innerHTML = <div class="score-item">${initials}</div>
-     <div class="score-item">$(score)</div>
+     result.innerHTML= '<div class='score-item'>${initials}</div> 
+     <div class='score-item'>$(score)</div>
 
      scoresheet.appendChild(result);
 }
