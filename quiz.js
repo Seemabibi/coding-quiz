@@ -140,5 +140,5 @@ displayQuestion();
 
 beginquiz.adEventListener("click", onStartGame);
 SaveScore.addEventListener ("click", onSaveScore);
-ViewScore.addEventListener ("click, OnViewScore");
-PlayAgain.addEventListener ("click, OnStartGame");
+ViewScore.addEventListener ("click", OnViewScore);
+PlayAgain.addEventListener ("click", OnStartGame);
