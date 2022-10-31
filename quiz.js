@@ -59,6 +59,51 @@ function onSelectAnswer (e) {
 
     displayMessage ('Correct')
 
+    } else {
+
+        score--;
+        displayMessage(wrong :-(')
+    }
+
+    // Call up the next question
+    displayQuestion();
+}
+
+function displayMessage (msg) {
+
+    // Display the Message
+    Message.textContent = msg;
+
+    // Clear the message afer 1 second
+    setTimeout (function() {
+        message.textContent = "";
+    }, 1000);
+}
+
+function displayQuestion () {
+
+    // Increment to get the next question
+    currentQuestion++;
+
+    console.log('Current Question Is ' + currentQuestion);
+
+    // Have we ran out of questions?
+    if (currentQuestion >=question.length) {
+        StopGame();
+        return;
+    }
+
+    // Load Question information from the question array
+    var question = questions[currentQuestion];
+    document.getElementById("question").textContent = question.title
+
+    //Clear any existing options 
+    Options.innerHTML = "";
+
+    // Load through the choice and output the new possible options 
+    for (var i = 0; : < question.choices.length; 1++) {
+
+        var option = document.createElement("div");
     }
 }
 
