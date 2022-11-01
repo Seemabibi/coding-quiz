@@ -11,19 +11,22 @@
 
 <body>
     <header>
-        <main class="main-container"> 
-            <!-- WelcomeQuiz-->
-        <div id="Welcome" class="individual-container"> 
+        <div id="Timer"></div>
+    </header>
+    <main class="main-container">
+        <!-- WelcomeQuiz-->
+        <div id="Welcome" class="individual-container">
             <h1>Welcome to the Code Quiz</h1>
             <button id="StartQuiz" class="btn">Start Quiz</button>
         </div>
         <!--MainQuiz-->
-        <div id="Quiz" class="hidden">
+        <div id="Quiz" class="box">
             <div id="question"></div>
-            <div id="Message">
-            </div>
-            <!--Results-->
-            <div id="end" class="individual-container">
+            <div id="Options"></div>
+            <div id="Message"></div>
+        </div>
+        <!--Results-->
+        <div id="end" class="individual-container box">
             <div id="summary"></div>
             <button id="ViewScores" class="btn">View All High Scores</button>
             <input type="text" id="initials" placeholder="Enter your initials" />
@@ -31,11 +34,10 @@
             <button id="PlayAgain" class="btn">Play Again</button>
         </div>
     </main>
-
 </body>
 
- <!--ScriptToQuestions and Quiz Link-->
- <script src="/assets/js/questions.js"></script>
- <script src="/assets/js/quiz.js"></script>
+<!--ScriptToQuestions and Quiz Link-->
+<script src="/assets/js/questions.js"></script>
+<script src="/assets/js/quiz.js"></script>
 
-</html> 
+</html>

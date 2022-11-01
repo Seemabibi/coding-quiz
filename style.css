@@ -1,11 +1,12 @@
 :root {
-    --main-text-color: #000;
-    --main-bg-color: #fff;
+    --main-text-color: #C0C0C0;
+    --main-bg-color: #FFF5EE;
     --button-color: rgb(58, 240, 170);
 }
 
 body {
     background-color: var(--main-bg-color);
+    background-image: url('background.webp');
     font-family: sans-serif;
     height: 1vh;
 }
@@ -13,6 +14,7 @@ body {
 header {
     width: 60;
     height: 100px;
+   color: #ff69b4;
     display: flex;
     margin: auto;
     justify-content: space-between;
