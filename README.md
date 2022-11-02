@@ -30,8 +30,10 @@ Score is generated and has an option to be saved using initals of user
 
 ## Deployed GitHub Link 
 
+https://github.com/Seemabibi/coding-quiz
 
 ## Repo Link 
+https://seemabibi.github.io/coding-quiz/
 
 ## Screenshot of task 
 
