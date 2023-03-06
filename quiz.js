@@ -1,127 +1,272 @@
-var StartQuiz = document.getElementById("StartQuiz")
-var SaveScore = document.getElementById("SaveScore")
-var ViewScore = document.getElementById("ViewScores")
-var PlayAgain = document.getElementById("PlayAgain")
 
-var Welcome = document.getElementById("Welcome")
-var Quiz = document.getElementById("Quiz")
-var Result = document.getElementById("end")
+  var highScores = document.getElementById("highScores");
+  var highScoreList = document.getElementById("highScoreList");
+  
 
-var Options = document.getElementById("Options")
-var Message = document.getElementById("Message")
+  var startQuiz = document.getElementById("startQuiz");
+  var currentScore = document.getElementById("currentScore");
+  var question = document.getElementById("question");
+  var option = document.getElementById("option");
+  var message = document.getElementById("message");
+  
 
-var Timer = document.getElementById("Timer")
+  var results = document.getElementById("results");
+  var viewScores = document.getElementById("viewScores");
+  var submit = document.getElementById("submit");
+  var welcome = document.getElementById("welcome");
+  var initials = document.getElementById("initials");
+  var finalScore = document.getElementById("finalScore");
+  var playAgain = document.getElementById("play-again");
+  
 
-var Summary = document.getElementById("summary")
-var SecondsLeft = 0;
-var Score = 0;
-var CurrentQuestion = 0;
-var CountdownTimer;
+  var timer = document.getElementById("timer");
+  
+  //Setting variables to 0 for start
+  var secondsLeft = 0;
+  var currentScore = 0;
+  var currentQuestionIndex = 0;
+  var countDownTimer;
+  results.style.display = "none";
+  highScoreList.style.display = "none";
+  timer.textContent = ""
+  
 
-function StopGame() {
-    // Stop the countdown timer 
-    clearInterval(CountdownTimer)
+  //clear coundown timer to stop game
+  function stopGame() {
+    clearInterval(countDownTimer);
+  
 
-    // clear the timer 
-    Timer.textContent = ""
+    timer.textContent = "";
+  
 
-    // Hide the question and show the result 
-    Quiz.style.display = 'none';
-    Result.style.display = 'flex'
+    quiz.style.display = "none";
+    welcome.style.display = "none";
+    results.style.display = "";
+  
 
-    // Display the score
-    Summary.textContent = "Your Score Is: " + score;
-}
+    finalScore.textContent = currentScore;
+  }
+  
 
-function onSaveScore(e) {
-    var initals = document.getElementById("initials").value
-    // If we have valid initials, save the score to local storage 
-    if (initals !== "") {
-        localStorage.setItem(initials, score);
-        document.getElementById("initials").value = "";
+  function updateTimer() {
+    timer.textContent = secondsLeft + " seconds left";
+  
+
+    if (secondsLeft <= 0) {
+      stopGame();
     }
-}
+  }
+  
 
-function onViewScores(e) {
-    Window.location.href = 'scores.html'
-}
+  //Function to begin the game
+  function startGame() {
+    secondsLeft = 60;
+    currentQuestionIndex = 0;
+    currentScore = 0;
+  
 
-function onSelectAnswer(e) {
-    var CorrectAnswer = questions[CurrentQuestion].answer;
-    var UserAnswer = e.target.textContent;
-    if (CorrectAnswer == UserAnswer) {
-        score++;
-        displayMessage('Correct')
+    //Start the timer countdown
+    updateTimer();
+    countDownTimer = setInterval(function () {
+      secondsLeft--;
+      updateTimer();
+    }, 1000);
+  
+
+    //hiding the last section and first section
+    welcome.style.display = "none";
+    results.style.display = "none";
+    quiz.style.display = "";
+  
+
+    displayQuestion();
+  }
+  
+
+  function viewHighScore() {
+    //hide uneccessary stuff
+    welcome.style.display = "none";
+    quiz.style.display = "none";
+  }
+  
+
+  //display question function
+  
+
+  function displayQuestion() {
+    //have we run out of questions?
+    if (currentQuestionIndex >= questions.length) {
+      stopGame();
+      return;
+    }
+  
+
+    //load question from the question array
+    var question = questions[currentQuestionIndex];
+    document.getElementById("question").textContent =
+      currentQuestionIndex + 1 + ". " + question.title;
+  
+
+    //clear any existing options from prev question
+  
+
+    option.innerHTML = "";
+  
+
+    //adding the button to HTML
+    for (i = 0; i < question.choices.length; i++) {
+      createButton(question.choices[i]);
+    }
+  }
+  //function to create button and add event listener
+  function createButton(text) {
+    var button = document.createElement("button");
+    button.textContent = text;
+    option.appendChild(button);
+    button.addEventListener("click", handleAnswerClick);
+  }
+  
+
+  //
+  function handleAnswerClick(event) {
+    var button = event.target;
+  
+
+    //what button was clicked
+    var selectedAnswer = button.textContent;
+  
+
+    //what was the correct answer
+    var currentQuestion = questions[currentQuestionIndex];
+  
+
+    var currentAnswer = currentQuestion.answer;
+  
+
+    //compare  selectred response to correct answer
+    if (currentAnswer === selectedAnswer) {
+      // - dispaly "correct"
+      displayMessage("Correct!");
+  
+
+      //add point to score
+      currentScore += 10;
+  
+
+      setTimeout(function () {
+        message.textContent = " ";
+      }, 1000);
     } else {
-        score--;
-        displayMessage("wrong :-('")
+      // - display "wrong"
+      displayMessage("Wrong :(");
+  
+
+      //- deduct 10s from timer
+      secondsLeft -= 10;
+  
+
+      if (secondsLeft < 0) {
+        secondsLeft = 0;
+      }
+  
+
+      updateTimer();
+  
+
+      //make the message go away after 1s
+      setTimeout(function () {
+        message.textContent = " ";
+      }, 1000);
     }
-    // Call up the next question
+  
+
+    //increiment the next question
+    currentQuestionIndex++;
+  
+
+    //loading in next answers and question
     displayQuestion();
-}
+  }
+  
 
-function displayMessage(msg) {
-    // Display the Message
-    Message.textContent = msg;
+  //create a function to save the results
+  
 
-    // Clear the message afer 1 second
-    setTimeout(function () {
-        Message.textContent = "";
-    }, 1000);
-}
+  function displayMessage(responseMessage) {
+    message.textContent = responseMessage;
+  }
+  
 
-function displayQuestion() {
-    // Increment to get the next question
-    currentQuestion++;
-    console.log('Current Question Is ' + currentQuestion);
+  function saveScore() {
+    //get the name and save into a variable
+    var initial = initials.value;
+    
+    // create an empty array for scores
+    var scores = [];
+  
 
-    // Have we ran out of questions?
-    if (currentQuestion >= questions.length) {
-        StopGame();
-        return;
+    // retrieves the scores from local storage
+    var existingScoresJson = localStorage.getItem("score");
+  
+
+    if (existingScoresJson !== null) {
+      scores = JSON.parse(existingScoresJson);
     }
-    // Load Question information from the question array
-    var question = questions[currentQuestion];
-    document.getElementById("question").textContent = question.title
+  
 
-    //Clear any existing options 
-    Options.innerHTML = "";
+    scores.push({
+      name: initial,
+      score: currentScore,
+    });
+  
 
-    // Load through the choice and output the new possible options 
-    for (var i = 0; i < question.choices.length; i++) {
-        var option = document.createElement("div");
-        option.textContent = question.choices[i];
-        option.onclick = onSelectAnswer;
-        option.classList.add("option");
-        Options.appendChild(option);
-    }
-}
+    // save the JSON string of score to local storage under key score
+    localStorage.setItem("score", JSON.stringify(scores));
+  
 
-function onStartGame() {
+    getHighScores();
+  }
+  
 
-    // Set the timer at 70 seconds 
-    secondsLeft = 70;
-    // Start at the first question 
-    currentQuestion = 0;
-    // Reset the score
-    score = 0;
-    // Start the timer 
-    CountdownTimer = setInterval(function () {
-        if (secondsLeft > 0) {
-            Timer.textContent = secondsLeft;
-        } else {
-            stopGame();
-        }
-        secondsLeft--;
-    }, 1000);
+  function getHighScores() {
+    //clear ui
+    highScoreList.innerHTML = "";
+  
 
-    document.getElementById('Welcome').style.display = "none";
-    end.style.display = "none";
-    Quiz.style.display = "flex";
-    displayQuestion();
-}
+    //display new score
+    var score = JSON.parse(localStorage.getItem("score"));
+   
+  //sorts scores from highest to lowesst
+    var sortedScores = score.sort((a, b) => b.score - a.score);
+  
 
-StartQuiz.addEventListener("click", onStartGame);
-SaveScore.addEventListener("click", onSaveScore);
-ViewScore.addEventListener("click", onViewScores);
-PlayAgain.addEventListener("click", onStartGame);
+  
+
+    // save top 5 scores to local storage
+    sortedScores.splice(5);
+  
+
+    //stores top 5 scores into local storage 
+    localStorage.setItem("topScores", JSON.stringify(sortedScores));
+  
+
+    
+  //retrieve from local storage
+  var topScores = JSON.parse(localStorage.getItem("topScores"));
+  
+
+  //mapping top scores into HTML
+    highScoreList.innerHTML = topScores
+      .map((score) => {
+        return `<span>${score.name} - ${score.score}</span>`;
+      }).join("");
+    
+    highScoreList.style.display = "block"
+    
+  }
+  
+
+  startQuiz.addEventListener("click", startGame);
+  highScores.addEventListener("click", getHighScores);
+  submit.addEventListener("click", saveScore);
+  playAgain.addEventListener("click", startGame)
